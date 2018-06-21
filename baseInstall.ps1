@@ -93,7 +93,7 @@ choco install flashplayerplugin -y
 choco install googlechrome -y
 choco install firefoxesr -y
 choco install jre8 -y
-choco install snagit /licenseCode:"ACFMR-BCMFH-YZAEW-KE78P-JC5C9" -y
+choco install snagit -params '/licenseCode:ACFMR-BCMFH-YZAEW-KE78P-JC5C9'
 choco install vlc -y
 choco install 7zip -y
 #choco install dellcommandupdate -y
@@ -122,7 +122,7 @@ Start-Process 'C:\Windows\System32\msiexec.exe' -ArgumentList "/i \\prodfs01\Dep
 Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -ArgumentList "/s" -Verb runAs -Wait #added -ArgumentList "/s"
 
 #Adobe Acrobat DC
-Start-Process '\\prodfs01\Software-Public\PC_Software\Adobe\Acrobat\Acrobat DC 2015\Acrobat_2015_Web_WWMUI.exe' -ArgumentList "/s" -Verb runAs -Wait
+#Start-Process '\\prodfs01\Software-Public\PC_Software\Adobe\Acrobat\Acrobat DC 2015\Acrobat_2015_Web_WWMUI.exe' -ArgumentList "/s" -Verb runAs -Wait
 
 #choco install office365 #change to SPIEoffice365
 #choco install adobeacrobat  #make custom
