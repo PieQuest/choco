@@ -1,9 +1,10 @@
 ﻿# =====================================================================================================
-#                                      Set Execution Policy
+#                                      Change Execution Policy
 # =====================================================================================================
 
 # Testing this:
 
+#Set-ExecutionPolicy Unrestricted -Force -Scope Process
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 
 $rstrct = New-Object -com wscript.shell;
@@ -22,10 +23,13 @@ Write-Host Enabling .NET Framework...`n
 Mount-DiskImage '\\prodfs01\Software-Public\Operating Systems\Windows X Enterprise\ISO\SW_DVD5_WIN_ENT_10_1607_64BIT_English_MLF_X21-07102.ISO'
 Start-Process '\\prodfs01\Software\Desktop Support Group\Scripts\netframeworkfix.bat' -Wait
 Dismount-DiskImage '\\prodfs01\Software-Public\Operating Systems\Windows X Enterprise\ISO\SW_DVD5_WIN_ENT_10_1607_64BIT_English_MLF_X21-07102.ISO'
+Write-Host .NET Framework Enabled. `n
 
 # =====================================================================================================
 #                                       Office Removal Tool
 # =====================================================================================================
+
+Write-Host Running Office Removal Tool...`n
 
 $OfficeRemovalToolDir = "\\prodfs01\Software-Public\PC_Software\Microsoft Office\Office Removal Tool"
 $OfficeRemovalTool = Start-Process -FilePath "$OfficeRemovalToolDir\o15-ctrremove.diagcab" -PassThru -Wait
@@ -56,7 +60,10 @@ Start-Sleep -s 1
 choco upgrade chocolatey
 Start-Sleep -s 1
 # Need to put repo on the NAS
-choco source add -n SPIErepo -s \\mmcmurray-7050\c$\Users\michaelm\Documents\Github\choco\repo
+#choco source add -n SPIErepo -s "\\mmcmurray-7050\c$\Users\michaelm\Documents\Github\choco\repo"
+
+Write-Host Chocolatety Install Complete!`n
+
 # =====================================================================================================
 #                                       Coco-Public-Repo App Install
 # =====================================================================================================
@@ -82,27 +89,36 @@ choco install 7zip -y
 #choco install filezilla -y
 #choco install itunes -y
 #choco install spotify -y
+#choco install lastpass -y
+#choco install lastpass-for-applications -y
 
 
 Write-Host Coco-Public-Repo Install Complete!`n
 
 # =====================================================================================================
-#                                       Coco-SPIE-Repo App Install
+#                                           SPIE-Repo App Install
 # =====================================================================================================
 
-Write-Host Installing Coco-SPIE-Repo Apps...`n
+Write-Host Installing SPIE-Repo Apps...`n
 
-choco install office365 #change to SPIEoffice365
+#Webtrends Report Exporter
+Start-Process 'C:\Windows\System32\msiexec.exe' -ArgumentList "/i \\prodfs01\DeployShare\WebtrendsReportExporter\ReportExporter.msi /s /norestart" -Wait	#added /s
+
+#Office 365
+Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -ArgumentList "/s" -Verb runAs -Wait #added -ArgumentList "/s"
+
+#Adobe Acrobat DC
+Start-Process '\\prodfs01\Software-Public\PC_Software\Adobe\Acrobat\Acrobat DC 2015\Acrobat_2015_Web_WWMUI.exe' -ArgumentList "/s" -Verb runAs -Wait
+
+#choco install office365 #change to SPIEoffice365
 #choco install adobeacrobat  #make custom
 #choco install office365business #make this custom?
 #SPIE DropBox
 
-
-
-
+Write-Host SPIE-Repo Install Complete!`n
 
 # =====================================================================================================
-#                                      Set Execution Policy
+#                                      Reset Execution Policy
 # =====================================================================================================
 
 # Test:
