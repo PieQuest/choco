@@ -95,8 +95,8 @@ choco install firefoxesr -y
 choco install jre8 -y
 choco install snagit -params '/licenseCode:ACFMR-BCMFH-YZAEW-KE78P-JC5C9' -y
 choco install vlc -y
-choco install 7zip -y
-#choco install dellcommandupdate -y
+choco install 7zip.install -y
+choco install dellcommandupdate -y
 #choco install adobereader -y
 #choco install notepadplusplus -y
 #choco install quicktime -y

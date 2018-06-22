@@ -32,7 +32,7 @@ choco uninstall firefoxesr -y
 choco uninstall jre8 -y
 choco uninstall snagit -y
 choco uninstall vlc -y
-choco uninstall 7zip -y
+choco uninstall 7zip.install -y
 #choco uninstall dellcommandupdate -y
 #choco uninstall adobereader -y
 #choco uninstall notepadplusplus -y
@@ -45,14 +45,6 @@ choco uninstall 7zip -y
 
 
 Write-Host Coco-Public-Repo Uninstall Complete!`n
-
-# =====================================================================================================
-#                                       Chocolatety Uninstall
-# =====================================================================================================
-
-Write-Host Uninstalling Chocolatety...`n
-choco uninstall chocolatey
-Write-Host Chocolatety Uninstall Complete!`n
 
 # =====================================================================================================
 #                                           SPIE-Repo App Install
