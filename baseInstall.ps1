@@ -119,7 +119,7 @@ Write-Host Installing SPIE-Repo Apps...`n
 Start-Process 'C:\Windows\System32\msiexec.exe' -ArgumentList "/i \\prodfs01\DeployShare\WebtrendsReportExporter\ReportExporter.msi /norestart" -Wait	#removed the added /s
 
 #Office 365
-Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -ArgumentList "/s" -Verb runAs -Wait #added -ArgumentList "/s"
+Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -Verb runAs -Wait #removed the added -ArgumentList "/s"
 
 #Adobe Acrobat DC
 #Start-Process '\\prodfs01\Software-Public\PC_Software\Adobe\Acrobat\Acrobat DC 2015\Acrobat_2015_Web_WWMUI.exe' -ArgumentList "/s" -Verb runAs -Wait
