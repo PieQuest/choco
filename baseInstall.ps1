@@ -3,7 +3,7 @@
 # =====================================================================================================
 
 # Testing this:
-
+<#
 #Set-ExecutionPolicy Unrestricted -Force -Scope Process
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 
@@ -11,7 +11,7 @@ $rstrct = New-Object -com wscript.shell;
 #$rstrct.AppActivate('Windows PowerShell')
 Start-Sleep -s 1
 $rstrct.SendKeys('a{ENTER}')
-
+#>
 # =====================================================================================================
 #                  possible function to add users &/or groups to local admin group
 # =====================================================================================================
@@ -116,7 +116,7 @@ Write-Host Coco-Public-Repo Install Complete!`n
 Write-Host Installing SPIE-Repo Apps...`n
 
 #Webtrends Report Exporter
-Start-Process 'C:\Windows\System32\msiexec.exe' -ArgumentList "/i \\prodfs01\DeployShare\WebtrendsReportExporter\ReportExporter.msi /s /norestart" -Wait	#added /s
+Start-Process 'C:\Windows\System32\msiexec.exe' -ArgumentList "/i \\prodfs01\DeployShare\WebtrendsReportExporter\ReportExporter.msi /norestart" -Wait	#removed the added /s
 
 #Office 365
 Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -ArgumentList "/s" -Verb runAs -Wait #added -ArgumentList "/s"
@@ -136,8 +136,9 @@ Write-Host SPIE-Repo Install Complete!`n
 # =====================================================================================================
 
 # Test:
-Set-ExecutionPolicy -ExecutionPolicy Default
 <#
+Set-ExecutionPolicy -ExecutionPolicy Default
+
 $rstrct = New-Object -com wscript.shell;
 #$rstrct.AppActivate('Windows PowerShell')
 Start-Sleep -s 1
