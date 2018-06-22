@@ -1,18 +1,4 @@
 ﻿# =====================================================================================================
-#                                      Change Execution Policy
-# =====================================================================================================
-
-# Testing this:
-<#
-#Set-ExecutionPolicy Unrestricted -Force -Scope Process
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted
-
-$rstrct = New-Object -com wscript.shell;
-#$rstrct.AppActivate('Windows PowerShell')
-Start-Sleep -s 1
-$rstrct.SendKeys('a{ENTER}')
-#>
-# =====================================================================================================
 #                  possible function to add users &/or groups to local admin group
 # =====================================================================================================
 <#
@@ -96,7 +82,7 @@ choco install jre8 -y
 choco install snagit -params '/licenseCode:ACFMR-BCMFH-YZAEW-KE78P-JC5C9' -y
 choco install vlc -y
 choco install 7zip.install -y
-choco install dellcommandupdate -y
+#choco install dellcommandupdate -y
 #choco install adobereader -y
 #choco install notepadplusplus -y
 #choco install quicktime -y
@@ -131,16 +117,3 @@ Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -Verb runAs
 
 Write-Host SPIE-Repo Install Complete!`n
 
-# =====================================================================================================
-#                                      Reset Execution Policy
-# =====================================================================================================
-
-# Test:
-<#
-Set-ExecutionPolicy -ExecutionPolicy Default
-
-$rstrct = New-Object -com wscript.shell;
-#$rstrct.AppActivate('Windows PowerShell')
-Start-Sleep -s 1
-$rstrct.SendKeys('a{ENTER}')
-#>

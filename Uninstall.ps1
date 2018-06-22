@@ -57,8 +57,8 @@ $webtrends = Get-WmiObject Win32_Product -filter "Name='Webtrends Report Exporte
 $webtrends.Uninstall()
 
 #Adobe Acrobat DC
-$acrobat = Get-WmiObject Win32_Product -filter "Name='Adobe Acrobat DC (2015)'"
-$acrobat.Uninstall()
+#$acrobat = Get-WmiObject Win32_Product -filter "Name='Adobe Acrobat DC (2015)'"
+#$acrobat.Uninstall()
 
 Write-Host SPIE-Repo Install Complete!`n
 
