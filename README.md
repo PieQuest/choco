@@ -9,8 +9,12 @@ Run with the following command:
 ```
 PowerShell.exe -ExecutionPolicy Unrestricted -Command '\\PathToTheScript\Install.ps1'
 ```
-
 Or you can simply use the Install.bat file.
+  
+Update with the following command:
+```
+choco upgrade all
+```
 
 ### Sources, Updates, & Future Goals
 Chocolatey's website:
