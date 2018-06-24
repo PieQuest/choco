@@ -42,7 +42,7 @@ choco install lastpass-for-applications -y
 choco install skype -y
 choco install teamviewer -y
 choco install ccleaner.portable -y
-choco install malwarebytes -y
+choco install malwarebytes --ignore-checksums -y
 choco install steam -y
 choco install geforce-experience -y
 choco install discord.install -y
