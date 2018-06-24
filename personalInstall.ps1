@@ -27,7 +27,6 @@ choco install adobeair -y
 choco install googlechrome -y
 choco install firefox -y
 choco install jre8 -y
-#choco install snagit -params '/licenseCode:ACFMR-BCMFH-YZAEW-KE78P-JC5C9' -y
 #choco install dellcommandupdate -y
 choco install vlc -y
 choco install 7zip.install -y
