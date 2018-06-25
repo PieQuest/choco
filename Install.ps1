@@ -20,11 +20,13 @@ function Add-LocalUser{
 #installed by this script. This step is just to ensure no installers crash. It mounts the Windows 10 disk, runs a .bat to enable
 #.NET Framework (.bat file provided by Amilia Mulka), then dismounts the disk image.
 
+<#
 Write-Host 'Enabling .NET Framework 3.5...'`n
 Mount-DiskImage '\\prodfs01\Software-Public\Operating Systems\Windows X Enterprise\ISO\SW_DVD5_WIN_ENT_10_1607_64BIT_English_MLF_X21-07102.ISO'
 Start-Process '\\prodfs01\Software\Desktop Support Group\Scripts\netframeworkfix.bat' -Wait
 Dismount-DiskImage '\\prodfs01\Software-Public\Operating Systems\Windows X Enterprise\ISO\SW_DVD5_WIN_ENT_10_1607_64BIT_English_MLF_X21-07102.ISO'
 Write-Host '.NET Framework 3.5 Enabled.'`n
+#>
 
 # =====================================================================================================
 #                                       Office Removal Tool
@@ -75,10 +77,11 @@ but only putting apps that we always need to keep up-to-date on there
 #>
 
 # Public App List:
+choco install dotnet3.5 -y
 choco install flashplayerplugin -y
-choco install googlechrome -y
+choco install google-chrome-for-enterprise -y
 choco install firefoxesr -y
-choco install jre8 -y
+choco install jre8 --x86 -y
 choco install snagit -params '/licenseCode:ACFMR-BCMFH-YZAEW-KE78P-JC5C9' -y
 choco install vlc -y
 choco install 7zip.install -y
