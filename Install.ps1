@@ -2,7 +2,7 @@
 #                                          Licensing & Keys
 # =====================================================================================================
 
-$snagitLicense = 'ACFMR-BCMFH-YZAEW-KE78P-JC5C9'
+[string]$snagitLicense = /licenseCode:ACFMR-BCMFH-YZAEW-KE78P-JC5C9
 
 # =====================================================================================================
 #                  possible function to add users &/or groups to local admin group
@@ -102,7 +102,7 @@ $result = $form.ShowDialog()
 if ($result -eq [System.Windows.Forms.DialogResult]::OK)
 {
     $apps = $listBox.SelectedItems
-    $apps #prints out the list of appsw
+    #$apps #prints out the list of apps
 }
 
 # =====================================================================================================
@@ -113,9 +113,9 @@ Write-Host "Run Office Removal Tool? [y/n] " -ForegroundColor Magenta -NoNewline
 $input = Read-Host
     Switch ($input) 
      { 
-       Y {Write-Host "Yes, Running Office Removal Tool...";  $RunOfficeRT=$true } 
+       Y {Write-Host "Yes, Running Office Removal Tool...";  $RunOfficeRT=$true} 
        N {Write-Host "No, Skipping Office Removal Tool.";    $RunOfficeRT=$false} 
-       Default {Write-Host "Running Office Removal Tool..."; $RunOfficeRT=$true }
+       Default {Write-Host "Running Office Removal Tool..."; $RunOfficeRT=$true}
      }
 
 
@@ -130,18 +130,6 @@ If ($RunOfficeRT -eq $true) {
     }
     else {write-host "Installation for Office Removal Tool cannot be found"}
 }
-
-# =====================================================================================================
-#                                     Required-SPIE-Repo App Install
-# =====================================================================================================
-
-Write-Host "Installing Webtrends..."
-Start-Process 'C:\Windows\System32\msiexec.exe' -ArgumentList "/i \\prodfs01\DeployShare\WebtrendsReportExporter\ReportExporter.msi /norestart" -Wait	#removed the added /s
-Write-Host "Webtrends Installed..."
-
-Write-Host "Installing Office 365..."
-Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -Verb runAs -Wait #removed the added -ArgumentList "/s"
-Write-Host "Office 365 Installed..."
 
 # =====================================================================================================
 #                                       Chocolatety Install
@@ -162,25 +150,37 @@ Write-Host Chocolatety Install Complete!`n
 #                                 Required-Coco-Public-Repo App Install
 # =====================================================================================================
 
-Write-Host Installing Optionally Selected Apps...`n
-
-
+Write-Host Installing Required Apps...`n
 
 # Public App List:
-choco install dotnet3.5 -y
+choco install dotnet3.5 -y #ignore the the non-critical error
 choco install flashplayerplugin -y
-choco install google-chrome-for-enterprise -y
+choco install google-chrome-for-enterprise --ignore-checksums -y #now ignors checksum errors
 choco install firefoxesr -y
-choco install jre8 --x86 -y
-choco install snagit -params '/licenseCode:'$snagitLicense -y
+choco install jre8 --x86 -y #ignore error, (throws error becasue we are only installing the x86 ver)
+choco install snagit -params $snagitLicense -y
 choco install vlc -y
 choco install 7zip.install -y
 
+# =====================================================================================================
+#                                     Required-SPIE-Repo App Install
+# =====================================================================================================
 
+Write-Host "Installing Webtrends..."
+Start-Process 'C:\Windows\System32\msiexec.exe' -ArgumentList "/i \\prodfs01\DeployShare\WebtrendsReportExporter\ReportExporter.msi /norestart" -Wait	#removed the added /s
+Write-Host "Webtrends Installed."`n
+
+Write-Host "Installing Office 365..."
+Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -Verb runAs -Wait #removed the added -ArgumentList "/s"
+Write-Host "Office 365 Installed."
+
+Write-Host Required Apps Installed...`n
 
 # =====================================================================================================
 #                                         Optional App Install
 # =====================================================================================================
+
+Write-Host Installing Optionally Selected Apps...`n
 
 if (('( NONE )' -Notin $apps) -Or (-Not ($apps.count -gt 0))) { #makes sure that the apps has something
     if ('Dell Command Update' -In $apps)             {choco install dellcommandupdate -y}
