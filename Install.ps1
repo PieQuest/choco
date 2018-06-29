@@ -135,9 +135,9 @@ Write-Host "Run Office Removal Tool? [y/n] " -ForegroundColor Magenta -NoNewline
 $input = Read-Host
     Switch ($input) 
      { 
-       Y {Write-Host "Running Office Removal Tool..."; $RunOfficeRT=$true} 
-       N {Write-Host "Skipping Office Removal Tool."; $RunOfficeRT=$false} 
-       Default {Write-Host "Running Office Removal Tool..."; $RunOfficeRT=$true}
+       Y {Write-Host "Running Office Removal Tool..." -ForegroundColor Magenta; $RunOfficeRT=$true} 
+       N {Write-Host "Skipping Office Removal Tool." -ForegroundColor Magenta; $RunOfficeRT=$false} 
+       Default {Write-Host "Running Office Removal Tool..." -ForegroundColor Magenta; $RunOfficeRT=$true}
      }
 
 
@@ -147,17 +147,17 @@ If ($RunOfficeRT -eq $true) {
     $OfficeRemovalTool = Start-Process -FilePath "$OfficeRemovalToolDir\o15-ctrremove.diagcab" -PassThru -Wait
 
     If (Test-Path $OfficeRemovalToolDir) {
-        If ($OfficeRemovalTool.ExitCode -eq 0) {write-host "Office Removal Tool completed without errors"}
-        else {"Office Removal Tool Failed"}
+        If ($OfficeRemovalTool.ExitCode -eq 0) {write-host "Office Removal Tool completed without errors" -ForegroundColor Magenta}
+        else {write-host "Office Removal Tool Failed" -ForegroundColor Red}
     }
-    else {write-host "Installation for Office Removal Tool cannot be found"}
+    else {write-host "Installation for Office Removal Tool cannot be found" -ForegroundColor Red}
 }
 
 # =====================================================================================================
 #                                       Chocolatety Install
 # =====================================================================================================
 
-Write-Host Installing Chocolatety...`n
+Write-Host "Installing Chocolatety..."`n -ForegroundColor Magenta
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 Start-Sleep -s 1
@@ -166,13 +166,13 @@ Start-Sleep -s 1
 # Need to put repo on the NAS
 #choco source add -n SPIErepo -s "\\mmcmurray-7050\c$\Users\michaelm\Documents\Github\choco\repo"
 
-Write-Host Chocolatety Install Complete!`n
+Write-Host "Chocolatety Install Complete!"`n -ForegroundColor Magenta
 
 # =====================================================================================================
 #                                 Required App Install
 # =====================================================================================================
 
-Write-Host Installing Required Apps...`n
+Write-Host "Installing Required Apps..."`n -ForegroundColor Magenta
 
 # Public App List:
 choco install dotnet3.5 -y #ignore the the non-critical error
@@ -184,23 +184,24 @@ choco install snagit -ArgumentList -params $snagitLicense -y
 choco install vlc -y
 choco install 7zip.install -y
 
-Write-Host "Installing Webtrends..."
+Write-Host "Installing Webtrends..." -ForegroundColor Yellow
 Start-Process 'C:\Windows\System32\msiexec.exe' -ArgumentList "/i \\prodfs01\DeployShare\WebtrendsReportExporter\ReportExporter.msi /norestart" -Wait	#removed the added /s
-Write-Host "Webtrends Installed."`n
+Write-Host "Webtrends Installed."`n -ForegroundColor Yellow
 
-Write-Host "Installing Office 365..."
+Write-Host "Installing Office 365..." -ForegroundColor Yellow
 Start-Process '\\prodfs01\DeployShare\Office365\Office365-64Bit.exe' -Verb runAs -Wait #removed the added -ArgumentList "/s"
-Write-Host "Office 365 Installed."
+Write-Host "Office 365 Installed." -ForegroundColor Yellow
 
-Write-Host Required Apps Installed.`n
+Write-Host "Required Apps Installed."`n -ForegroundColor Magenta
 
 # =====================================================================================================
 #                                         Optional App Install
 # =====================================================================================================
 
-Write-Host Installing Optionally Selected Apps...`n
-
 if (('( NONE )' -Notin $apps) -Or (-Not ($apps.count -gt 0))) { #makes sure that the apps has something
+
+    Write-Host "Installing Optionally Selected Apps..."`n -ForegroundColor Magenta
+
     if ('Dell Command Update' -In $apps)             {choco install dellcommandupdate -y}
     if ('Adobe Reader' -In $apps)                    {choco install adobereader -y}
     if ('Notepad++' -In $apps)                       {choco choco install notepadplusplus -y}
@@ -217,6 +218,7 @@ if (('( NONE )' -Notin $apps) -Or (-Not ($apps.count -gt 0))) { #makes sure that
     if ('VMware Workstation 14.1.2' -In $apps)       {choco install vmwareworkstation -y}
     if ('Adobe Acrobat DC' -In $apps)                {Start-Process '\\prodfs01\Software-Public\PC_Software\Adobe\Acrobat\Acrobat DC 2015\Acrobat_2015_Web_WWMUI.exe' -ArgumentList "/s" -Verb runAs -Wait}
     
-}
+    Write-Host "Optionally Selected App Install Complete!" -ForegroundColor Magenta
 
-Write-Host Optionally Selected App Install Complete!`n
+}
+else {Write-Host No Optionally Selected Apps to Install.}
