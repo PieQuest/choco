@@ -1,4 +1,26 @@
-﻿# =====================================================================================================
+﻿<#
+Created by: Michael McMurray
+For: SPIE IT HelpDesk
+This new install script should be considered a constant work in progress.
+This script allows you to install the base applications quicker.
+It allows you to install some (not all yet) of the optionaly installable apps.
+It allows you to update all base applications in with one line.
+Includes simple GUI.
+#>
+# =====================================================================================================
+#                                         Sources & Commands
+# =====================================================================================================
+<#
+Run with (or use the install.bat wrapper):
+PowerShell.exe -ExecutionPolicy Unrestricted -Command '\\PathToTheScript\Install.ps1'
+
+Update with:
+choco upgrade all
+
+Sources:
+https://chocolatey.org/
+#>
+# =====================================================================================================
 #                                          Licensing & Keys
 # =====================================================================================================
 
@@ -62,6 +84,7 @@ $listBox.Size = New-Object System.Drawing.Size(315,20) #the inner box dimensions
 $listBox.SelectionMode = 'MultiExtended'
 
 [void] $listBox.Items.Add('( NONE )')
+[void] $listBox.Items.Add('Adobe Reader')
 [void] $listBox.Items.Add('Adobe Acrobat DC')
 [void] $listBox.Items.Add('Adobe Creative Cloud')
 [void] $listBox.Items.Add('TO DO: Adobe Illustrator')
@@ -89,7 +112,6 @@ $listBox.SelectionMode = 'MultiExtended'
 [void] $listBox.Items.Add('TO DO: SmartDraw')
 [void] $listBox.Items.Add('VMware Workstation 14.1.2')
 [void] $listBox.Items.Add('Dell Command Update')
-[void] $listBox.Items.Add('Adobe Reader')
 [void] $listBox.Items.Add('Lastpass for Browsers')
 [void] $listBox.Items.Add('Lastpass for Applications')
 
